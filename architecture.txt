@@ -1,0 +1,37 @@
+ft_turing/
+│
+├── src/
+│   ├── tape.ml           # 1. Ruban infini
+│   ├── head.ml           # 2. Tête de lecture
+│   ├── state.ml          # 3. États
+│   ├── transition.ml     # 4. Règles de transition
+│   ├── parser.ml         # 5. Lecture et validation JSON
+│   ├── machine.ml        # 6. Moteur d'exécution
+│   └── main.ml           # Point d'entrée du programme
+│
+├── machines/
+│   ├── unary_add.json
+│   ├── palindrome.json
+│   ├── 0n1n.json
+│   ├── 02n.json
+│   └── universal.json
+│
+├── Makefile
+└── README.md
+
+
+---------------------------------------------------------------------------------------------
+tape.ml 
+Dans ce fichier je vais créer le ruban infini
+
+Définition du ruban infini:
+
+Un ruban infini est une mémoire qui peut s'étendre indéfinement.
+Le ruban peut s'étendre à gauche et à droite.
+Une tête de lecture peut lire ou modifier chaque case.
+
+Une bande est composée de cases:
+-Chaque case contient un seul symbole de l'alphabet défini dans le JSON: Cela peut etre 1 , 0 , - , = ou . (symbole blank)
+
+
+
