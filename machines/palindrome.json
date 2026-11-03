@@ -1,0 +1,30 @@
+/* Ce fichier décrit une machine de Turing qui vérifie si un mot est un palindrome
+
+Les champs obligatoires: 
+
+name: Nom de la machine.
+
+alphabet: Symboles autorisés.
+
+blank: Symbole représentant une case vide.
+
+states: Liste des états.
+
+initial: État de départ.
+
+finals: États d'arrêt.
+
+transitions: Règles de fonctionnement.
+
+
+
+
+
+
+La machine doit :
+1. Lire les symboles du ruban.
+2. Comparer les symboles aux deux extrémités.
+3. Déterminer si le mot est un palindrome.
+4. Écrire y ou n à droite du dernier caractère du ruban.
+5. S'arrêter dans un état final.
+*/

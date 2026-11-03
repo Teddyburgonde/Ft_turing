@@ -1,0 +1,30 @@
+/* Ce fichier décrit une machine qui vérifie qu'un mot contient autant de 0 que de 1, avec tous les 0 avant les 1. 
+
+Les champs obligatoires: 
+
+name: Nom de la machine.
+
+alphabet: Symboles autorisés.
+
+blank: Symbole représentant une case vide.
+
+states: Liste des états.
+
+initial: État de départ.
+
+finals: États d'arrêt.
+
+transitions: Règles de fonctionnement.
+
+
+
+
+
+
+La machine doit :
+1. Lire les symboles du ruban.
+2. Associer chaque 0 à un 1.
+3. Vérifier qu'aucun symbole ne reste sans correspondance.
+4. Écrire y ou n à droite du dernier caractère.
+5. S'arrêter dans un état final.
+*/

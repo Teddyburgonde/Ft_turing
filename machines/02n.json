@@ -1,0 +1,28 @@
+/* Ce fichier décrit une machine qui vérifie si un mot contient un nombre de 0 égal à une puissance de 2.
+
+Les champs obligatoires: 
+
+name: Nom de la machine.
+
+alphabet: Symboles autorisés.
+
+blank: Symbole représentant une case vide.
+
+states: Liste des états.
+
+initial: État de départ.
+
+finals: États d'arrêt.
+
+transitions: Règles de fonctionnement.
+
+
+
+La machine doit:
+1. Lire les symboles du ruban.
+2. Compter les 0 en les éliminant progressivement par groupes de deux.
+3. Vérifier si leur nombre est une puissance de 2.
+4. Écrire y ou n à droite du dernier caractère.
+5. S'arrêter dans un état final.
+
+*/
