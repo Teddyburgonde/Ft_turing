@@ -1,3 +1,6 @@
+(* Définir la structure du ruban *)
+type tape = ...
+
 (* Création d'un ruban *)
 let create ...
 
@@ -6,3 +9,7 @@ let read ...
 
 (* Écrire dans une case *)
 let wrtite ...
+
+
+
+
