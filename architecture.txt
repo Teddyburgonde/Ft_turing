@@ -28,7 +28,10 @@ Définition du ruban infini:
 
 Un ruban infini est une mémoire qui peut s'étendre indéfinement.
 Le ruban peut s'étendre à gauche et à droite.
-Une tête de lecture peut lire ou modifier chaque case.
+Une tête de lecture peut faire 3 opérations:
+- Lire 
+- Ecrire
+- Se deplacer 
 
 Une bande est composée de cases:
 -Chaque case contient un seul symbole de l'alphabet défini dans le JSON: Cela peut etre 1 , 0 , - , = ou . (symbole blank)
