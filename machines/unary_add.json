@@ -1,0 +1,19 @@
+/* Ce fichier décrit une machine de Turing capable d'effectuer une addition
+
+Les champs obligatoires: 
+
+name: Nom de la machine.
+
+alphabet: Symboles autorisés.
+
+blank: Symbole représentant une case vide.
+
+states: Liste des états.
+
+initial: État de départ.
+
+finals: États d'arrêt.
+
+transitions: Règles de fonctionnement.
+
+*/
