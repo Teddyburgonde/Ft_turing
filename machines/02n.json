@@ -1,4 +1,4 @@
-/* Ce fichier décrit une machine qui vérifie si un mot contient un nombre de 0 égal à une puissance de 2.
+/* Ce fichier préparera une machine qui vérifie si un mot appartient au langage 0^(2n), c'est-à-dire s'il contient un nombre pair de 0.
 
 Les champs obligatoires: 
 
@@ -18,10 +18,10 @@ transitions: Règles de fonctionnement.
 
 
 
-La machine doit:
+La machine devra :
 1. Lire les symboles du ruban.
-2. Compter les 0 en les éliminant progressivement par groupes de deux.
-3. Vérifier si leur nombre est une puissance de 2.
+2. Vérifier les 0 par groupes de deux.
+3. Déterminer si leur nombre est pair.
 4. Écrire y ou n à droite du dernier caractère.
 5. S'arrêter dans un état final.
 

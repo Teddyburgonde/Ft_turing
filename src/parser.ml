@@ -1,15 +1,10 @@
-(* Lit le fichier JSON *)
-let load ...
-(* Utiliser Yojson *)
+(* Les erreurs utilisateur sont renvoyées explicitement à Main. *)
+let load_machine (path : string) : (Types.description, string) result =
+  let _ = path in
+  Error "TODO(parser): load and validate the JSON machine description"
 
-(* Check du JSON *)
-let validate ...
-(* Vérifier si ils comportements bien: 
-  - champs
-  - alphabet
-  - États
-  - transitions
-*)
-
-(* Transforme les données JSON en structures OCaml *)
-let convert_to_machine ...
+let validate_input
+    (description : Types.description)
+    (input : string) : (unit, string) result =
+  let _ = (description, input) in
+  Error "TODO(parser): validate the input alphabet"

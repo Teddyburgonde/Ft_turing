@@ -1,22 +1,16 @@
-Développeur 1: 
-- tape.ml [❌]
-- head.ml [❌]
-- state.ml [❌]
-- transition.ml [❌]
-- machine.ml [❌]
-- unary_add.json [❌]
-- Makefile [✅️]
+Répartition concrète proposée
 
-
-Développeur 2:
-- parser.ml [❌]
-- main.ml [❌]
+Développeur 1 :
+- src/types.ml [✅️]
+- src/tape.ml [❌]
+- src/transition.ml [❌]
+- src/machine.ml [❌]
 - README.md [❌]
-- palindrome.json [❌]
-- 0n1n.json [❌]
-- 02n.json [❌]
-- universal.json [❌]
+- machines/unary_add.json [❌]
 
-
-
-✅️ ❌ ⏳
+Développeur 2 :
+- src/parser.ml [❌]
+- src/main.ml [❌]
+- machines/palindrome.json [❌]
+- machines/0n1n.json [❌]
+- machines/02n.json [❌]

@@ -1,12 +1,22 @@
-(* Initialise la machine avec le ruban, la tête et l'état initial *)
-let initialize ...
+type configuration = {
+  description : Types.description;
+  tape : Tape.t;
+  state : string;
+}
 
-(* Exécute une transition en appelant les fonctions des autres modules *)
-let apply ... 
+type step_result =
+  | Continue of configuration * Types.transition
+  | Halted of configuration
+  | Blocked of configuration * string
 
+let initialize (description : Types.description) (input : string) : configuration =
+  let _ = (description, input) in
+  failwith "TODO(machine): initialize"
 
-(* Enchaîne les transitions jusqu'à atteindre un état final ou un blocage *)
-let run ... 
+let step (configuration : configuration) : step_result =
+  let _ = configuration in
+  failwith "TODO(machine): step"
 
-(*  Affiche le ruban, la position de la tête et la transition effectuée. *)
-let display ... 
+let run (configuration : configuration) : step_result =
+  let _ = configuration in
+  failwith "TODO(machine): run"

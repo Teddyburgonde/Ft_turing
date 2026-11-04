@@ -1,22 +1,12 @@
 ft_turing/
-│
-├── src/
-│   ├── tape.ml           # 1. Ruban infini
-│   ├── head.ml           # 2. Tête de lecture
-│   ├── state.ml          # 3. États
-│   ├── transition.ml     # 4. Règles de transition
-│   ├── parser.ml         # 5. Lecture et validation JSON
-│   ├── machine.ml        # 6. Moteur d'exécution
-│   └── main.ml           # Point d'entrée du programme
-│
-├── machines/
-│   ├── unary_add.json
-│   ├── palindrome.json
-│   ├── 0n1n.json
-│   ├── 02n.json
-│   └── universal.json
-│
-├── Makefile
-└── README.md
-
-
+|
+|-- src/
+|   |-- types.ml          # Types partagés du domaine
+|   |-- tape.ml           # Ruban infini et tête (zipper immuable)
+|   |-- transition.ml     # Recherche d'une règle
+|   |-- parser.ml         # Lecture et validation JSON / entrée
+|   |-- machine.ml        # Configuration, step et boucle d'exécution
+|   `-- main.ml           # Interface en ligne de commande
+|-- machines/             # Cinq descriptions encore à écrire
+|-- Makefile
+`-- README.md

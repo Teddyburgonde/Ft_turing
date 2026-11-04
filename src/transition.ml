@@ -1,22 +1,7 @@
-(* Recherche la transition correspondant à l'état actuel et au symbole lu *)
-let find ...
-
-(* Vérifie qu'une transition est valide *)
-let is_valid ...
-
-(* Détermine le symbole à écrire. *)
-let get_write ... 
-
-(* Détermine le prochain état. *)
-let get_next_state ...
-
-(* Détermine le déplacement *)
-let get_action...
-
-(* Applique la transition *)
-let apply ... 
-(* 
-get_write 
-get_next_state
-get_action
-*)
+(* La recherche est séparée de l'application, qui appartient à Machine.step. *)
+let find
+    (description : Types.description)
+    ~(state : string)
+    ~(read : char) : Types.transition option =
+  let _ = (description, state, read) in
+  failwith "TODO(transition): find"
