@@ -12,14 +12,14 @@ let create (blank : char) (input : string) : t =
 	| [] -> { left = []; current = blank; right = []; blank }
 	| current :: right -> { left = []; current; right; blank }
 
-
+(* Lit le caractère à la position de la tête. *)
 let read (tape : t) : char =
-  let _ = tape in
-  failwith "TODO(tape): read"
+	tape.current
 
+(* Copie le ruban en remplaçant le caractère courant. *)
 let write (symbol : char) (tape : t) : t =
-  let _ = (symbol, tape) in
-  failwith "TODO(tape): write"
+	{ tape with current = symbol }
+
 
 let move (direction : Types.direction) (tape : t) : t =
   let _ = (direction, tape) in
