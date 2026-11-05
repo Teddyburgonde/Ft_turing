@@ -22,10 +22,32 @@ let write (symbol : char) (tape : t) : t =
 
 
 let move (direction : Types.direction) (tape : t) : t =
-  let _ = (direction, tape) in
-  failwith "TODO(tape): move"
+  match direction with
+  | Types.Right ->
+      (match tape.right with
+       | next :: rest ->
+           { tape with
+             left = tape.current :: tape.left;
+             current = next;
+             right = rest }
+       | [] ->
+           { tape with
+             left = tape.current :: tape.left;
+             current = tape.blank })
+  | Types.Left ->
+      (match tape.left with
+       | previous :: rest ->
+           { tape with
+             left = rest;
+             current = previous;
+             right = tape.current :: tape.right }
+       | [] ->
+           { tape with
+             current = tape.blank;
+             right = tape.current :: tape.right })
 
 let to_string (tape : t) : string =
-  let _ = tape in
-  failwith "TODO(tape): to_string"
+  let left = String.of_seq (List.to_seq (List.rev tape.left)) in
+  let right = String.of_seq (List.to_seq tape.right) in
+  Printf.sprintf "[%s<%c>%s]" left tape.current right
 
