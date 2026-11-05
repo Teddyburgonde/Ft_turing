@@ -1,4 +1,4 @@
-(* Le ruban et la tête forment un zipper immuable. *)
+(* Un ruban centré sur la tête de lecture *)
 type t = {
   left : char list;
   current : char;
@@ -6,9 +6,12 @@ type t = {
   blank : char;
 }
 
-let create ~(blank : char) (input : string) : t =
-  let _ = (blank, input) in
-  failwith "TODO(tape): create"
+(* Créer un ruban à partir de l'entrée *)
+let create (blank : char) (input : string) : t =
+	match List.of_seq (String.to_seq input) with
+	| [] -> { left = []; current = blank; right = []; blank }
+	| current :: right -> { left = []; current; right; blank }
+
 
 let read (tape : t) : char =
   let _ = tape in
