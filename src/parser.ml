@@ -43,15 +43,17 @@ let as_char context json =
 	else fail_validation (context ^ " must have length 1")
 
 
-(* Cherche la première valeur présente plusieurs fois. *)
+(* Cherche le premier doublon. *)
 let find_duplicate values =
-	let rec find seen = function
-		| [] -> None
-		| value :: rest ->
-				if List.mem value seen then Some value
-				else find (value :: seen) rest
-	in
-	find [] values
+    let rec find seen lst =
+        match lst with
+        | [] -> None
+        | value :: rest ->
+			(* Regarde si value est dans la liste seen *)
+            if List.mem value seen then Some value
+            else find (value :: seen) rest
+    in
+    find [] values
 
 
 (* Refuse une liste qui contient un doublon. *)
@@ -61,14 +63,14 @@ let ensure_unique context values =
 	| Some _ -> fail_validation (context ^ " contains a duplicate")
 
 
-(* Parse un champ contenant une liste de chaînes. *)
+(* Récupère et lit une liste de textes à partir d'un champ. *)
 let parse_string_list name fields =
 	required name fields
 	|> as_list name
 	|> List.map (as_string (name ^ " item"))
 
 
-(* Parse l'alphabet sous forme de caractères. *)
+(* Récupère l'alphabet sous forme de caractères. *)
 let parse_alphabet fields =
 	required "alphabet" fields
 	|> as_list "alphabet"
