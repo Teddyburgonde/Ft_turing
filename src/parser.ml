@@ -38,6 +38,7 @@ let as_string context value =
 (* Convertit une chaîne JSON de longueur un en caractère. *)
 let as_char context json =
 	let value = as_string context json in
+	(* Si la chaîne fait exactement 1 caractère de long, on le retourne *)
 	if String.length value = 1 then value.[0]
 	else fail_validation (context ^ " must have length 1")
 
