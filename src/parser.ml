@@ -163,7 +163,7 @@ let validate_description (description : Types.description) : unit =
 
 
 (* Parse tous les champs d'une description de machine. *)
-let parse_description (json : Yojson.Safe.t) =
+let parse_description (json : Yojson.Safe.t) : Types.description =
 	let fields = as_object "machine" json in
 	let name = required "name" fields |> as_string "name" in
 	let alphabet = parse_alphabet fields in
