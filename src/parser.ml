@@ -143,7 +143,7 @@ let validate_state_transitions
 
 
 (* Vérifie la cohérence globale d'une description. *)
-let validate_description (description : Types.description) =
+let validate_description (description : Types.description) : unit =
 	ensure_unique "alphabet" description.alphabet;
 	ensure_unique "states" description.states;
 	ensure_unique "finals" description.finals;
