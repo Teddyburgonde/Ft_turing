@@ -3,40 +3,40 @@ exception Validation_error of string
 
 
 (* Interrompt le parsing avec un message *)
-let fail_validation message =
+let fail_validation (message : string) =
 	raise (Validation_error message)
 
 
 (* Récupère un champ obligatoire, ou lève une erreur s'il est absent. *)
-let required name fields =
+let required (name : string) (fields : (string * 'a) list) =
 	match List.assoc_opt name fields with
 	| Some value -> value
 	| None -> fail_validation (name ^ " is missing")
 
 
 (* Vérifie que la valeur est un objet JSON et extrait ses champs. *)
-let as_object context value =
+let as_object (context : string) (value : Yojson.Safe.t) =
 	match value with
 	| `Assoc fields -> fields
 	| _ -> fail_validation (context ^ " must be an object")
 
 
 (* Vérifie que la valeur est une liste JSON et extrait ses éléments. *)
-let as_list context value =
+let as_list (context : string) (value : Yojson.Safe.t) =
 	match value with
 	| `List values -> values
 	| _ -> fail_validation (context ^ " must be a list")
 
 
 (* Vérifie que la valeur est une chaîne JSON et extrait sa valeur. *)
-let as_string context value =
+let as_string (context : string) (value : Yojson.Safe.t) =
     match value with
     | `String value -> value
     | _ -> fail_validation (context ^ " must be a string")
 
 
 (* Convertit une chaîne JSON de longueur un en caractère. *)
-let as_char context json =
+let as_char (context : string) (json : Yojson.Safe.t) =
 	let value = as_string context json in
 	(* Si la chaîne fait exactement 1 caractère de long, on le retourne *)
 	if String.length value = 1 then value.[0]
@@ -44,8 +44,8 @@ let as_char context json =
 
 
 (* Cherche le premier doublon. *)
-let find_duplicate values =
-    let rec find seen lst =
+let find_duplicate (values : 'a list) =
+    let rec find (seen : 'a list) (lst : 'a list) =
         match lst with
         | [] -> None
         | value :: rest ->
@@ -57,28 +57,30 @@ let find_duplicate values =
 
 
 (* Refuse une liste qui contient un doublon. *)
-let ensure_unique context values =
+let ensure_unique (context : string) (values : 'a list) =
 	match find_duplicate values with
 	| None -> ()
 	| Some _ -> fail_validation (context ^ " contains a duplicate")
 
 
 (* Récupère et lit une liste de textes à partir d'un champ. *)
-let parse_string_list name fields =
+let parse_string_list
+		(name : string)
+		(fields : (string * Yojson.Safe.t) list) =
 	required name fields
 	|> as_list name
 	|> List.map (as_string (name ^ " item"))
 
 
 (* Récupère l'alphabet sous forme de caractères. *)
-let parse_alphabet fields =
+let parse_alphabet (fields : (string * Yojson.Safe.t) list) =
 	required "alphabet" fields
 	|> as_list "alphabet"
 	|> List.map (as_char "alphabet item")
 
 
-(* Parse une règle de transition. *)
-let parse_transition state json =
+(* Analyse le JSON et renvoie une transition. *)
+let parse_transition (state : string) (json : Yojson.Safe.t) =
 	let context = "transition for " ^ state in
 	let fields = as_object context json in
 	let read = required "read" fields |> as_char (context ^ " read") in
@@ -95,8 +97,8 @@ let parse_transition state json =
 	{ Types.read = read; write; next_state; action }
 
 
-(* Parse les listes de transitions indexées par état. *)
-let parse_transitions fields =
+(* Analyse le JSON et renvoie une liste de transitions pour chaque état. *)
+let parse_transitions (fields : (string * Yojson.Safe.t) list) =
 	fields
 	|> List.map
 			 (fun (state, json_transitions) ->
@@ -109,7 +111,11 @@ let parse_transitions fields =
 
 
 (* Vérifie les références et symboles d'une transition. *)
-let validate_transition alphabet states state (transition : Types.transition) =
+let validate_transition
+		(alphabet : char list)
+		(states : string list)
+		(state : string)
+		(transition : Types.transition) =
 	if not (List.mem transition.next_state states) then
 		fail_validation ("to_state " ^ transition.next_state ^ " is not in states");
 	if not (List.mem transition.read alphabet) then
@@ -119,7 +125,10 @@ let validate_transition alphabet states state (transition : Types.transition) =
 
 
 (* Vérifie les transitions associées à un état. *)
-let validate_state_transitions alphabet states (state, transitions) =
+let validate_state_transitions
+		(alphabet : char list)
+		(states : string list)
+		((state, transitions) : string * Types.transition list) =
 	if not (List.mem state states) then
 		fail_validation ("transition state " ^ state ^ " is not in states");
 	List.iter (validate_transition alphabet states state) transitions;
@@ -154,7 +163,7 @@ let validate_description (description : Types.description) =
 
 
 (* Parse tous les champs d'une description de machine. *)
-let parse_description json =
+let parse_description (json : Yojson.Safe.t) =
 	let fields = as_object "machine" json in
 	let name = required "name" fields |> as_string "name" in
 	let alphabet = parse_alphabet fields in
