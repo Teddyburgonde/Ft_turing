@@ -2,7 +2,7 @@
 	"name": "palindrome",
 	"alphabet": ["0", "1", "y", "n", ".", "X"],
 	"blank": ".",
-	"states": ["readfirst", "findlast0", "findlast1", "checklast0", "returnleft", "writeyes", "writeno", "HALT"],
+	"states": ["readfirst", "findlast0", "findlast1", "checklast0", "checklast1", "returnleft", "writeyes", "writeno", "HALT"],
 	"initial": "readfirst",
 	"finals": ["HALT"],
 	"transitions": {
@@ -58,6 +58,32 @@
 				"action": "LEFT"
 			}
 		],
+		"findlast1": [
+			{
+				"read": "0",
+				"to_state": "findlast1",
+				"write": "0",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "findlast1",
+				"write": "1",
+				"action": "RIGHT"
+			},
+			{
+				"read": "X",
+				"to_state": "findlast1",
+				"write": "X",
+				"action": "RIGHT"
+			},
+			{
+				"read": ".",
+				"to_state": "checklast1",
+				"write": ".",
+				"action": "LEFT"
+			}
+		],
 		"checklast0": [
 			{
 				"read": "0",
@@ -69,6 +95,44 @@
 				"read": "1",
 				"to_state": "writeno",
 				"write": "1",
+				"action": "RIGHT"
+			},
+			{
+				"read": "X",
+				"to_state": "checklast0",
+				"write": "X",
+				"action": "LEFT"
+			},
+			{
+				"read": ".",
+				"to_state": "writeyes",
+				"write": ".",
+				"action": "RIGHT"
+			}
+		],
+		"checklast1": [
+			{
+				"read": "1",
+				"to_state": "returnleft",
+				"write": "X",
+				"action": "LEFT"
+			},
+			{
+				"read": "0",
+				"to_state": "writeno",
+				"write": "0",
+				"action": "RIGHT"
+			},
+			{
+				"read": "X",
+				"to_state": "checklast1",
+				"write": "X",
+				"action": "LEFT"
+			},
+			{
+				"read": ".",
+				"to_state": "writeyes",
+				"write": ".",
 				"action": "RIGHT"
 			}
 		],
@@ -125,9 +189,30 @@
 			}
 		],
 		"returnleft": [
-
-
-
+			{
+				"read": "0",
+				"to_state": "returnleft",
+				"write": "0",
+				"action": "LEFT"
+			},
+			{
+				"read": "1",
+				"to_state": "returnleft",
+				"write": "1",
+				"action": "LEFT"
+			},
+			{
+				"read": "X",
+				"to_state": "returnleft",
+				"write": "X",
+				"action": "LEFT"
+			},
+			{
+				"read": ".",
+				"to_state": "readfirst",
+				"write": ".",
+				"action": "RIGHT"
+			}
 		]
 	}
 }
