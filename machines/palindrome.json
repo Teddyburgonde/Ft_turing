@@ -74,10 +74,60 @@
 		],
 		"writeno": [
 			{
-				//TODO 
-				// read X to state writeno write X action right
+				"read": "X",
+				"to_state": "writeno",
+				"write": "X",
+				"action": "RIGHT"
+			},
+			{
+				"read": "0",
+				"to_state": "writeno",
+				"write": "0",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "writeno",
+				"write": "1",
+				"action": "RIGHT"
+			},
+			{
+				"read": ".",
+				"to_state": "HALT",
+				"write": "n",
+				"action": "RIGHT"
 			}
-		
+		],
+		"writeyes": [
+			{
+				"read": "X",
+				"to_state": "writeyes",
+				"write": "X",
+				"action": "RIGHT"
+			},
+			{
+				"read": "0",
+				"to_state": "writeyes",
+				"write": "0",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "writeyes",
+				"write": "1",
+				"action": "RIGHT"
+			},
+			{
+				"read": ".",
+				"to_state": "HALT",
+				"write": "y",
+				"action": "RIGHT"
+			}
+		],
+		"returnleft": [
+
+
+
 		]
 	}
 }
