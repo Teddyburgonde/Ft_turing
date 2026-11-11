@@ -1,30 +1,83 @@
-/* Ce fichier décrit une machine de Turing qui vérifie si un mot est un palindrome
-
-Les champs obligatoires: 
-
-name: Nom de la machine.
-
-alphabet: Symboles autorisés.
-
-blank: Symbole représentant une case vide.
-
-states: Liste des états.
-
-initial: État de départ.
-
-finals: États d'arrêt.
-
-transitions: Règles de fonctionnement.
-
-
-
-
-
-
-La machine doit :
-1. Lire les symboles du ruban.
-2. Comparer les symboles aux deux extrémités.
-3. Déterminer si le mot est un palindrome.
-4. Écrire y ou n à droite du dernier caractère du ruban.
-5. S'arrêter dans un état final.
-*/
+{
+	"name": "palindrome",
+	"alphabet": ["0", "1", "y", "n", ".", "X"],
+	"blank": ".",
+	"states": ["readfirst", "findlast0", "findlast1", "checklast0", "returnleft", "writeyes", "writeno", "HALT"],
+	"initial": "readfirst",
+	"finals": ["HALT"],
+	"transitions": {
+		"readfirst": [
+			{
+				"read": "0",
+				"to_state": "findlast0",
+				"write": "X",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "findlast1",
+				"write": "X",
+				"action": "RIGHT"
+			},
+			{
+				"read": "X",
+				"to_state": "readfirst",
+				"write": "X",
+  				"action": "RIGHT"
+			},
+			{
+				"read": ".",
+				"to_state": "HALT",
+				"write": "y",
+				"action": "RIGHT"
+			}
+		],
+		"findlast0": [
+			{
+				"read": "0",
+				"to_state": "findlast0",
+				"write": "0",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "findlast0",
+				"write": "1",
+				"action": "RIGHT"
+			},
+			{
+				"read": "X",
+				"to_state": "findlast0",
+				"write": "X",
+				"action": "RIGHT"
+			},
+			{
+				"read": ".",
+				"to_state": "checklast0",
+				"write": ".",
+				"action": "LEFT"
+			}
+		],
+		"checklast0": [
+			{
+				"read": "0",
+				"to_state": "returnleft",
+				"write": "X",
+				"action": "LEFT"
+			},
+			{
+				"read": "1",
+				"to_state": "writeno",
+				"write": "1",
+				"action": "RIGHT"
+			}
+		],
+		"writeno": [
+			{
+				//TODO 
+				// read X to state writeno write X action right
+			}
+		
+		]
+	}
+}

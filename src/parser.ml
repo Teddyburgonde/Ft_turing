@@ -197,9 +197,18 @@ let load_machine (path : string) : (Types.description, string) result =
 	| Yojson.Json_error message -> Error ("invalid JSON: " ^ message)
 	| Yojson.Safe.Util.Type_error (message, _) -> Error ("invalid JSON: " ^ message)
 
-
+(* Vérifie que l'entrée ne contient que l'alphabet autorisé, sans le blanc. *)
 let validate_input
 		(description : Types.description)
 		(input : string) : (unit, string) result =
-	let _ = (description, input) in
-	Error "TODO(parser): validate the input alphabet"
+	let rec validate symbols =
+		match symbols with
+		| [] -> Ok ()
+		| symbol :: rest ->
+			if symbol = description.blank then
+				Error "input contains the blank symbol"
+			else if not (List.mem symbol description.alphabet) then
+				Error (Printf.sprintf "input symbol %c is not in alphabet" symbol)
+			else validate rest
+	in
+	validate (List.of_seq (String.to_seq input))

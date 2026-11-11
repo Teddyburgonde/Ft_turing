@@ -2,15 +2,18 @@ Répartition concrète proposée
 
 Développeur 1 :
 - src/types.ml [✅️]
-- src/tape.ml [❌]
-- src/transition.ml [❌]
-- src/machine.ml [❌]
-- README.md [❌]
+- src/tape.ml [✅️]
+- src/transition.ml [✅️]
+- src/machine.ml [❌] ⏳
+- README.md [✅️]
 - machines/unary_add.json [❌]
 
 Développeur 2 :
-- src/parser.ml [❌]
+- src/parser.ml [✅️]
 - src/main.ml [❌]
 - machines/palindrome.json [❌]
 - machines/0n1n.json [❌]
 - machines/02n.json [❌]
+- machines/universal.json [❌]
+
+

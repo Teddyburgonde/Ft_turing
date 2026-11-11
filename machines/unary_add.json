@@ -1,19 +1,38 @@
-/* Ce fichier décrit une machine de Turing capable d'effectuer une addition
-
-Les champs obligatoires: 
-
-name: Nom de la machine.
-
-alphabet: Symboles autorisés.
-
-blank: Symbole représentant une case vide.
-
-states: Liste des états.
-
-initial: État de départ.
-
-finals: États d'arrêt.
-
-transitions: Règles de fonctionnement.
-
-*/
+{
+	"name": "add",
+	"alphabet": ["1", "+", "."],
+	"blank": ".",
+	"states": ["scanright", "eraseone", "HALT"],
+	"initial": "scanright",
+	"finals": ["HALT"],
+	"transitions": {
+		"scanright": [
+			{
+				"read": "+",
+				"to_state": "scanright",
+				"write": "1",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "scanright",
+				"write": "1",
+				"action": "RIGHT"
+			},
+			{
+				"read": ".",
+				"to_state": "eraseone",
+				"write": ".",
+				"action": "LEFT"
+			}
+		],
+		"eraseone": [
+			{
+				"read": "1",
+				"to_state": "HALT",
+				"write": ".",
+				"action": "RIGHT"
+			}
+		]
+	}
+}
