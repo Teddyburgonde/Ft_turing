@@ -1,28 +1,25 @@
-/* Ce fichier préparera une machine qui vérifie si un mot appartient au langage 0^(2n), c'est-à-dire s'il contient un nombre pair de 0.
-
-Les champs obligatoires: 
-
-name: Nom de la machine.
-
-alphabet: Symboles autorisés.
-
-blank: Symbole représentant une case vide.
-
-states: Liste des états.
-
-initial: État de départ.
-
-finals: États d'arrêt.
-
-transitions: Règles de fonctionnement.
-
-
-
-La machine devra :
-1. Lire les symboles du ruban.
-2. Vérifier les 0 par groupes de deux.
-3. Déterminer si leur nombre est pair.
-4. Écrire y ou n à droite du dernier caractère.
-5. S'arrêter dans un état final.
-
-*/
+{
+	"name": "even",
+	"alphabet": ["0", "1", "y", "n", "."],
+	"blank": ".",
+	"states": ["even_zero", "odd_zero", "error", "HALT"],
+	"initial": "even_zero",
+	"finals": ["HALT"],
+	"transitions": {
+		"even_zero": [
+			{ "read": "0", "to_state": "odd_zero", "write": "0", "action": "RIGHT" },
+			{ "read": "1", "to_state": "error", "write": "1", "action": "RIGHT" },
+			{ "read": ".", "to_state": "HALT", "write": "y", "action": "RIGHT" }
+		],
+		"odd_zero": [
+			{ "read": "0", "to_state": "even_zero", "write": "0", "action": "RIGHT" },
+			{ "read": "1", "to_state": "error", "write": "1", "action": "RIGHT" },
+			{ "read": ".", "to_state": "HALT", "write": "n", "action": "RIGHT" }
+		],
+		"error": [
+			{ "read": "0", "to_state": "error", "write": "0", "action": "RIGHT" },
+			{ "read": "1", "to_state": "error", "write": "1", "action": "RIGHT" },
+			{ "read": ".", "to_state": "HALT", "write": "n", "action": "RIGHT" }
+		]
+	}
+}

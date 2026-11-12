@@ -1,30 +1,40 @@
-/* Ce fichier décrit une machine qui vérifie qu'un mot contient autant de 0 que de 1, avec tous les 0 avant les 1. 
-
-Les champs obligatoires: 
-
-name: Nom de la machine.
-
-alphabet: Symboles autorisés.
-
-blank: Symbole représentant une case vide.
-
-states: Liste des états.
-
-initial: État de départ.
-
-finals: États d'arrêt.
-
-transitions: Règles de fonctionnement.
-
-
-
-
-
-
-La machine doit :
-1. Lire les symboles du ruban.
-2. Associer chaque 0 à un 1.
-3. Vérifier qu'aucun symbole ne reste sans correspondance.
-4. Écrire y ou n à droite du dernier caractère.
-5. S'arrêter dans un état final.
-*/
+{
+	"name": "n_times_1",
+	"alphabet": ["0", "1", "#", "y", "n", "."],
+	"blank": ".",
+	"states": ["replace_zero", "replace_one", "go_to_first", "seeking_digit", "error", "HALT"],
+	"initial": "replace_one",
+	"finals": ["HALT"],
+	"transitions": {
+		"replace_zero": [
+			{ "read": "0", "to_state": "replace_one", "write": "#", "action": "RIGHT" },
+			{ "read": "1", "to_state": "replace_zero", "write": "1", "action": "LEFT" },
+			{ "read": "#", "to_state": "replace_zero", "write": "#", "action": "LEFT" },
+			{ "read": ".", "to_state": "error", "write": ".", "action": "RIGHT" }
+		],
+		"replace_one": [
+			{ "read": "0", "to_state": "replace_one", "write": "0", "action": "RIGHT" },
+			{ "read": "1", "to_state": "replace_zero", "write": "#", "action": "LEFT" },
+			{ "read": "#", "to_state": "replace_one", "write": "#", "action": "RIGHT" },
+			{ "read": ".", "to_state": "go_to_first", "write": ".", "action": "LEFT" }
+		],
+		"go_to_first": [
+			{ "read": "0", "to_state": "go_to_first", "write": "0", "action": "LEFT" },
+			{ "read": "1", "to_state": "go_to_first", "write": "1", "action": "LEFT" },
+			{ "read": "#", "to_state": "go_to_first", "write": "#", "action": "LEFT" },
+			{ "read": ".", "to_state": "seeking_digit", "write": ".", "action": "RIGHT" }
+		],
+		"seeking_digit": [
+			{ "read": "0", "to_state": "error", "write": "0", "action": "RIGHT" },
+			{ "read": "1", "to_state": "error", "write": "1", "action": "RIGHT" },
+			{ "read": "#", "to_state": "seeking_digit", "write": "#", "action": "RIGHT" },
+			{ "read": ".", "to_state": "HALT", "write": "y", "action": "RIGHT" }
+		],
+		"error": [
+			{ "read": "0", "to_state": "error", "write": "0", "action": "RIGHT" },
+			{ "read": "1", "to_state": "error", "write": "1", "action": "RIGHT" },
+			{ "read": "#", "to_state": "error", "write": "#", "action": "RIGHT" },
+			{ "read": ".", "to_state": "HALT", "write": "n", "action": "RIGHT" }
+		]
+	}
+}
