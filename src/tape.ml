@@ -56,5 +56,11 @@ let move (direction : Types.direction) (tape : t) : t =
 let to_string (tape : t) : string =
 	let left = String.of_seq (List.to_seq (List.rev tape.left)) in
 	let right = String.of_seq (List.to_seq tape.right) in
-	Printf.sprintf "[%s<%c>%s]" left tape.current right
+	Printf.sprintf
+		"[%s%s%c%s%s]"
+		left
+		(Colors.string_of_bold_color `Cyan)
+		tape.current
+		Colors.reset
+		right
 

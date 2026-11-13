@@ -6,6 +6,7 @@ OCAMLFIND = ocamlfind
 PACKAGE = yojson
 
 SOURCES = src/types.ml \
+		  src/colors.ml \
           src/tape.ml \
           src/transition.ml \
           src/parser.ml \
