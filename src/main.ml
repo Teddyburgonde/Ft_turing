@@ -9,15 +9,18 @@ let display_help () =
 	print_endline "optional arguments:";
 	print_endline "  -h, --help  show this help message and exit"
 
+
 (* Convertit une direction en texte pour l'affichage. *)
 let direction_to_string (direction : Types.direction) : string =
 	match direction with
 	| Types.Left -> "LEFT"
 	| Types.Right -> "RIGHT"
 
+
 (* Formate une liste de textes entre crochets. *)
 let format_list (values : string list) : string =
 	"[ " ^ String.concat ", " values ^ " ]"
+
 
 (* Formate une transition selon la notation du sujet. *)
 let format_transition
@@ -55,6 +58,7 @@ let display_description (description : Types.description) : unit =
 		description.transitions;
 	print_endline separator
 
+
 (* Affiche le ruban avant la transition qui va être exécutée. *)
 let display_step
 		(configuration : Machine.configuration)
@@ -64,10 +68,12 @@ let display_step
 		(Tape.to_string configuration.tape)
 		(format_transition configuration.state transition)
 
+
 (* Affiche une erreur et renvoie le code d'échec. *)
 let report_error message =
 	prerr_endline ("ft_turing: " ^ message);
 	1
+
 
 (* Exécute la machine pas à pas en affichant toute sa trace. *)
 let rec run_with_trace (configuration : Machine.configuration) : int =
@@ -86,6 +92,7 @@ let rec run_with_trace (configuration : Machine.configuration) : int =
 		Printf.eprintf "%s\n" (Tape.to_string blocked_configuration.tape);
 		report_error reason
 
+
 (* Charge, valide, affiche puis exécute une machine. *)
 let run_machine jsonfile input =
 	match Parser.load_machine jsonfile with
@@ -96,6 +103,7 @@ let run_machine jsonfile input =
 			 | Ok () ->
 					 display_description description;
 					 Machine.initialize description input |> run_with_trace)
+
 
 (* Analyse les arguments et choisit l'action à effectuer. *)
 let main () =
@@ -110,4 +118,3 @@ let main () =
 
 (* Lance le programme avec le code de sortie calculé par main. *)
 let () = exit (main ())
-

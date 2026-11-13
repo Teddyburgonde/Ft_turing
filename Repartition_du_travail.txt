@@ -4,16 +4,15 @@ Développeur 1 :
 - src/types.ml [✅️]
 - src/tape.ml [✅️]
 - src/transition.ml [✅️]
-- src/machine.ml [❌] ⏳
+- src/machine.ml [✅️] ⏳
 - README.md [✅️]
-- machines/unary_add.json [❌]
+- machines/unary_add.json [✅️]
+- machines/palindrome.json [✅️]
 
 Développeur 2 :
 - src/parser.ml [✅️]
-- src/main.ml [❌]
-- machines/palindrome.json [❌]
+- src/main.ml [✅️] ⏳
 - machines/0n1n.json [❌]
 - machines/02n.json [❌]
-- machines/universal.json [❌]
 
 
