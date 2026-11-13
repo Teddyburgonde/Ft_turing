@@ -20,14 +20,18 @@ let initialize (description : Types.description) (input : string) : configuratio
 		state = description.initial }
 
 
-(* Exécute au plus une transition depuis la configuration courante. *)
+(* Exécute une seule étape de la machine. *)
 let step (configuration : configuration) : step_result =
+	(* Vérifie si la machine est déjà dans un état final. *)
 	if List.mem configuration.state configuration.description.finals then
 		Halted configuration
 	else
+		(* Lit le caractère situé sous la tête de lecture. *)
 		let symbol = Tape.read configuration.tape in
+		(* Cherche l'instruction correspondant à l'état et au caractère lus. *)
 		match Transition.find configuration.description configuration.state symbol with
 		| None ->
+			(* Aucune instruction trouvée : la machine est bloquée. *)
 			Blocked
 				(configuration,
 				 Printf.sprintf
@@ -35,14 +39,17 @@ let step (configuration : configuration) : step_result =
 					 configuration.state
 					 symbol)
 		| Some transition ->
+			(* Crée un ruban en écrivant puis en déplaçant la tête. *)
 			let tape =
 				configuration.tape
 				|> Tape.write transition.write
 				|> Tape.move transition.action
 			in
+			(* Crée une nouvelle configuration contenant le nouveau ruban et le nouvel état. *)
 			let next_configuration =
 				{ configuration with tape; state = transition.next_state }
 			in
+			(* Renvoie la configuration avec le nouveau ruban et l'instruction exécutée. *)
 			Continue (next_configuration, transition)
 
 
