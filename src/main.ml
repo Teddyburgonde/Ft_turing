@@ -1,4 +1,4 @@
-(* Affiche l'aide de la ligne de commande. *)
+(* Affiche comment utiliser le programme. *)
 let display_help () =
 	print_endline "usage: ft_turing [-h] jsonfile input";
 	print_endline "";
@@ -22,7 +22,7 @@ let format_list (values : string list) : string =
 	"[ " ^ String.concat ", " values ^ " ]"
 
 
-(* Formate une transition selon la notation du sujet. *)
+(* Transforme une transition en texte pour l'affichage. *)
 let format_transition
 		(state : string)
 		(transition : Types.transition) : string =
